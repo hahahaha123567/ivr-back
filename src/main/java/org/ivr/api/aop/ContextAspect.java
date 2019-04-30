@@ -65,8 +65,10 @@ public class ContextAspect {
     @Around("execution(public * org.ivr.api.service.recognition.RecognitionService.service())")
     public Object doRecognizeAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Optional serviceEnum = (Optional) proceedingJoinPoint.proceed();
-        if (!serviceEnum.isPresent() && !ServiceEnum.DEFAULT.equals(contextService.get(ContextService.SERVICE_KEY)) && !(Boolean) contextService.get(ContextService.SERVICE_RESULT_KEY)) {
-            serviceEnum = contextService.get(ContextService.SERVICE_KEY);
+        if (!serviceEnum.isPresent()
+                && !ServiceEnum.DEFAULT.equals(contextService.get(ContextService.SERVICE_KEY))
+                && !(Boolean) contextService.get(ContextService.SERVICE_RESULT_KEY)) {
+            serviceEnum = Optional.of(contextService.get(ContextService.SERVICE_KEY));
         }
         return serviceEnum;
     }

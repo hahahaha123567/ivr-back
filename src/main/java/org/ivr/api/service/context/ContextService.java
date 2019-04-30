@@ -15,7 +15,7 @@ public interface ContextService {
     String SERVICE_KEY = "SERVICE_";
     String SERVICE_RESULT_KEY = "SERVICE_RESULT_";
 
-    <T> void set(String property, T value);
+    void set(String property, Object value);
 
-    <T> T get(String key);
+    Object get(String key);
 }

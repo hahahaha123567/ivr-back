@@ -19,14 +19,14 @@ public class ContextServiceImpl implements ContextService {
     Cache<String, Object> cache = CacheBuilder.newBuilder().build();
 
     @Override
-    public <T> void set(String property, T value) {
+    public void set(String property, Object value) {
         Integer requestId = ThreadLocalHelper.getRequestId();
         String key = property + requestId;
         cache.put(key, value);
     }
 
     @Override
-    public <T> T get(String key) {
-        return (T) cache.getIfPresent(key);
+    public Object get(String key) {
+        return cache.getIfPresent(key);
     }
 }
