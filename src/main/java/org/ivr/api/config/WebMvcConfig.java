@@ -55,6 +55,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public HttpMessageConverter gsonHttpMessageConverter() {
+        return new GsonHttpMessageConverter(gson());
+    }
+
+    @Bean
     public GlobalExceptionResolver globalExceptionResolver() {
         return new GlobalExceptionResolver(gson());
     }
@@ -96,7 +101,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new GsonHttpMessageConverter());
+        converters.add(gsonHttpMessageConverter());
     }
 
     @Override

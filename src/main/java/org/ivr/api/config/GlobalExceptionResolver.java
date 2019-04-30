@@ -40,10 +40,6 @@ public class GlobalExceptionResolver extends SimpleMappingExceptionResolver {
 
     @Override
     public ModelAndView resolveException(@NonNull HttpServletRequest request, @Nullable HttpServletResponse response, Object handler, @NonNull Exception ex) {
-        logger.info("Request URI:{}", request.getRequestURI());
-        logger.info("Request method:{}", request.getMethod());
-        logger.info("Request Param:{}", gson.toJson(request.getParameterMap()));
-        logger.error("", ex);
 
         Response myResponse;
         if (ex instanceof MissingArgException) {
@@ -51,6 +47,10 @@ public class GlobalExceptionResolver extends SimpleMappingExceptionResolver {
         } else if (ex instanceof UnrecognizedException) {
             myResponse = Response.fail(401, ex.getMessage());
         } else {
+            logger.info("Request URI:{}", request.getRequestURI());
+            logger.info("Request method:{}", request.getMethod());
+            logger.info("Request Param:{}", gson.toJson(request.getParameterMap()));
+            logger.error("", ex);
             myResponse = Response.fail(402, ex.getMessage());
         }
 
