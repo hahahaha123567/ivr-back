@@ -44,7 +44,7 @@ public class ChatServiceImpl implements ChatService {
                 logger.error("调用图灵机器人接口失败, response反序列化失败");
                 throw new UnrecognizedException("机器人心情不好, 不想跟你聊天");
             } else {
-                return response.getResults().get(0).getValues().entrySet().toString();
+                return response.getResults().get(0).getValues().values().toString();
             }
         } catch (Exception e) {
             logger.error("调用图灵机器人接口失败", e);
